@@ -31,6 +31,7 @@ def session(request, tournament_id, session_name):
                 result = "%s -- %s" % (game.score_1,game.score_2)
             else:
                 result = "unplayed"
+            game.result = result
         games_2 = Game.objects.filter(session=sess.id,team_2=team.id)
         for game in games_2:
             game.opp_name = Team.objects.get(id=game.team_1.id).name
@@ -38,6 +39,7 @@ def session(request, tournament_id, session_name):
                 result = "%s -- %s" % (game.score_2,game.score_1)
             else:
                 result = "unplayed"
+            game.result = result
         team.games = list(chain(games_1,games_2))
 
     return render_to_response('seeding/session.html',

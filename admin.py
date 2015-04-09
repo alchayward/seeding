@@ -65,6 +65,6 @@ admin.site.register(Team,TeamAdmin)
 admin.site.register(UserProfile)
 
 class GameAdmin(admin.ModelAdmin):
-    list_display = ('id','team_1', 'team_2', 'completed' )
-    list_filter = ['tournament','session']
+    list_display = ('id','round','team_1', 'team_2', 'completed' )
+    list_filter = ['tournament','session','round']
 admin.site.register(Game,GameAdmin)

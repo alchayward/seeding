@@ -12,12 +12,7 @@
 					<tr>
 						 <td>R{{game.round}} </td>
 						 <td>&nbsp vs. {{ game.opp_name}}: &nbsp</td>
-						 <td>	{% if game.completed %}
-										{{game.score_1}} -- {{game.score_2}} 
-								{% else %} 
-										not complete
-								{% endif %}
-						 </td>
+						 <td>{{game.result}}</td>
 					</tr>
 				{% endfor %}
 				</table>

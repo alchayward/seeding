@@ -1,0 +1,8 @@
+{% extends 'seeding/session.html' %}
+
+{% block administer %}
+ <form action="update">
+status = {{sess.status}}
+ <input type="submit" value="Update Session" name="Update">
+</form> 
+{% endblock %}

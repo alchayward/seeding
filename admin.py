@@ -52,7 +52,6 @@ class TournamentAdmin(admin.ModelAdmin):
             return response
 
     actions = [run_tournament]
-    #inlines = [TeamInline,SessionInline]
     inlines = [SessionInline]
 
 admin.site.register(Tournament, TournamentAdmin)

@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, render_to_response
 from seeding.models import Tournament, Team, Session, Game
 from django.contrib.auth import authenticate, login
@@ -42,11 +43,21 @@ def session(request, tournament_id, session_name):
             game.result = result
         team.games = list(chain(games_1,games_2))
 
-    return render_to_response('seeding/session.html',
-        {'tour': tour, 
-        'sess': sess})
+    if request.user.is_authenticated():
+        return render_to_response('seeding/session_run.html',
+            {'tour': tour, 
+            'sess': sess})
+    else:
+        return render_to_response('seeding/session.html',
+            {'tour': tour, 
+            'sess': sess})
 
+@login_required
 def run_session(request, tournament_id, session_name):
+    sess = Session.objects.get(tournament=tournament_id,
+        slug=session_name)
+    tour = Tournament.objects.get(id__exact=tournament_id)
+
     context = RequestContext(request)
     
     #Check for permission
@@ -59,18 +70,14 @@ def run_session(request, tournament_id, session_name):
         #add a round
         
 
-    if add_game:
-        pass   
     # If the request is a HTTP POST, try to pull out the relevant information.
     if request.method == 'POST':
         # Gather the username and password provided by the user.
         # This information is obtained from the login form.
-        
-
-        action = request.POST['action']
-        password = request.POST['password']
-
-        
+        update = request.POST['update']
+    sess.status = 'UP'
+    sess.save()   
+    return HttpResponse('Updating...')    
 
 #Not used yet
 def game_list(request,session_id):

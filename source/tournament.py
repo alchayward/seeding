@@ -64,9 +64,9 @@ class Game:
      self.scores = scores
      self.round = round;
      if not self.scores:
-        self.played = False
+        self.completed = False
      else:
-        self.played = True
+        self.completed = True
 
 
 class Round():

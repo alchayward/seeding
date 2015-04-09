@@ -2,14 +2,14 @@
 # Can't play the same team more than once.
 
 import tournament 
-from tournament import Session
+from tournament import Session,Game
 import networkx as nx
 import numpy as np
 import pymc
 from scipy import cosh, rand, log
 from scipy.special import gammaincc, gammaln
 from numpy import dot,exp,array
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 def log_2_pois_like(d,a,s1,s2): #taken out the max_score  limit for now
     dp = np.sign(d)*np.power(np.abs(d),1.5)
@@ -244,7 +244,7 @@ class Seeding(Session,double_model):
         #super(self.__class__, self).__init__()
         double_model.__init__(self)
         Session.__init__(self,teams)
-        self.current_round = tournament.Round(1)
+        #self.current_round = tournament.Round(1)
 
     def get_teams_to_seed(self,round):
         neg_list = []   
@@ -270,7 +270,7 @@ class Seeding(Session,double_model):
                 game = tournament.Game(
                     teams = [self.teams[g[0]],self.teams[g[1]]])
                 game.staged = True
-                game.played = False
+                game.completed = False
                 game.round = round
                 game_list.append(game)
         return game_list
@@ -281,6 +281,9 @@ def update_session(games, teams):
     #function.
     
     # create model instance
+    S = Seeding(teams)
+    S.games = games
+
         # pass games and team list.
         # team list is pretty irrelevant, just need a labeling
 
@@ -289,7 +292,32 @@ def update_session(games, teams):
 
     pass
 
+def order_teams(teams):
+    sort
+
+def stage_first_round(teams):
+    n_teams = length(teams)
+    n_games = n_games//2
+    new_games = []
+    for ii in range(n_games):
+        g=Game()
+        g.round = 1
+        g.id = 0
+        g.teams = [ teams[ii],teams[ii+1] ]
+        g.completed = False
+        g.scores = [0,0]
+        new_games.append(g)
+    return new_games
+
+def stage_second_round(games,teams):
+    pass
+
+
+       
+
 def stage_round(round):
+    if round == 1:
+       stage_first_round(n_teams)
     pass
 
 

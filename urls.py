@@ -4,6 +4,9 @@ from seeding import views
 urlpatterns = patterns('',
     url(r'^$', views.tournament_list),
     url(r'^login/$', views.user_login, name='login'),
+    url(
+    r'^tournaments/(?P<tournament_id>\d+)/[\w -]+/(?P<session_name>[\w-]+)/update$'
+        , views.run_session),
     url(r'^tournaments/(?P<tournament_id>\d+)/[\w -]+/(?P<session_name>[\w -]+)/$',
          views.session),
     url(r'^tournaments/(?P<tournament_id>\d+)/[\w -]+/$',

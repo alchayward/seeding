@@ -66,8 +66,7 @@ class Round(models.Model):
             default=FUTURE)
 
 class Team(models.Model):
-    tournament = models.ManyToManyField('Tournament',null=True)
-    session = models.ManyToManyField('Session',null=True)
+    session = models.ForeignKey('Session',null=True)
     name = models.CharField(max_length=250)
     member1 = models.CharField(max_length=250,default = "member 1")
     member2 = models.CharField(max_length=250,default = "member 2")

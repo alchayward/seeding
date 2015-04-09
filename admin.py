@@ -57,8 +57,8 @@ class TournamentAdmin(admin.ModelAdmin):
 admin.site.register(Tournament, TournamentAdmin)
 
 class TeamAdmin(admin.ModelAdmin):
-    list_display = ('name', 'member1', 'member2', 'member3' )
-    list_filter = ['tournament','session']
+    list_display = ('name','session', 'member1', 'member2', 'member3' )
+    list_filter = ['session']
 admin.site.register(Team,TeamAdmin)
 
 admin.site.register(UserProfile)

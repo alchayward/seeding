@@ -1,0 +1,29 @@
+{% extends 'seeding/tournament.html' %}
+
+	{% block main_content %}
+		 <h2>{{sess.name}}</h1>
+		 <h3> rankings </h2>
+		 {% if sess.teams %}
+			  <ul>
+			  {% for team in sess.teams %}
+				<li>{{team.rank}}) {{ team.name }} : {{team.score}} </li>
+				<table cellspacing="30">
+				{% for game in team.games %}
+					<tr>
+						 <td>R{{game.round}} </td>
+						 <td>&nbsp vs. {{ game.opp_name}}: &nbsp</td>
+						 <td>	{% if game.completed %}
+										{{game.score_1}} -- {{game.score_2}} 
+								{% else %} 
+										not complete
+								{% endif %}
+						 </td>
+					</tr>
+				{% endfor %}
+				</table>
+				<br></br>
+			  {% endfor %}
+			  </ul>
+		 {% endif %}
+	<a href="{{ tour.get_absolute_url }}">{{ tour.name }}</a>
+	{% endblock %}

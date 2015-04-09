@@ -1,0 +1,27 @@
+{% extends 'dh5bp/base.html' %}
+{% load url from future %}
+{% load staticfiles %}
+{% block title %}{{ tour.name }}{% endblock %}
+{% block content %}
+
+<h1>{{tour.name}}</h1>
+
+	{% block main_content %}
+
+
+		 <h2>Sessions:</h2>
+		 {% if sessions %}
+			  <ul>
+			  {% for sess in sessions %}
+					<li><a href="{{ sess.get_absolute_url }}">{{ sess.name }}</a></li>
+			  {% endfor %}
+			  </ul>
+		 {% else %}
+			  <p>Currently there are no sessions</p>
+		 {% endif %}
+
+	{% endblock %} 
+	<!-- <h2><a href="{{ tour.teams.get_absolute_url }}">Teams</a></h2> -->
+
+{% endblock %}
+

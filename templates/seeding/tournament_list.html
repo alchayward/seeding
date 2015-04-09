@@ -1,0 +1,16 @@
+{% extends 'seeding/base.html' %}
+{% block title %}Tournaments{% endblock %}
+{% block content %}
+    <h2>Tournament List</h2>
+    {% if tournaments %}
+        <ul>
+        {% for t in tournaments %}
+			<li><a href="{{ t.get_absolute_url }}">{{ t.name }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>There are no tournaments.</p>
+    {% endif %}
+
+
+{% endblock %}

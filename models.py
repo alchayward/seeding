@@ -79,14 +79,14 @@ class Team(models.Model):
 
 class Game(models.Model):
 	
-    tournament = models.ForeignKey(Tournament,default=None)
     team_1 = models.ForeignKey(Team, related_name = 'game_team1')
     team_2 = models.ForeignKey(Team, related_name = 'game_team2')
     completed = models.BooleanField(default = 'FALSE') 
-    score_1 = models.IntegerField()
-    score_2 = models.IntegerField()
+    score_1 = models.IntegerField(default=0)
+    score_2 = models.IntegerField(default=0)
     session = models.ForeignKey(Session, default = None)
     round = models.IntegerField(default = 0)
+    staged = models.BooleanField(default = 'FALSE') 
     #duration = models.TimeField(default = ) 
     #ref = models.ForeignKey(Player, related_name='game_ref')
     #ass_ref = models.ForeignKey(Player, related_name = 'game_ass_ref')

@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from django.template import RequestContext
 from itertools import chain
+from seeding import staging
 
 def tournament_list(request):
     tourn_list = Tournament.objects.all()
@@ -52,6 +53,24 @@ def session(request, tournament_id, session_name):
             {'tour': tour, 
             'sess': sess})
 
+def update_score(sess):
+    
+    #get games
+    games = Game.objects.filter(session=sess.id,staged=True)
+    teams = Team.objects.filter(session=sess.id)
+    s = staging.Seeding(teams)
+    s.games = games
+    s.fit_model()
+    ratings  = s.mcmc.theta.stats()['mean']
+    print ratings
+    #make class
+    #update the scores
+    for ind,t in enumerate(teams):
+        t.score = rating[ind]
+        t.save()
+
+
+
 @login_required
 def run_session(request, tournament_id, session_name):
     sess = Session.objects.get(tournament=tournament_id,
@@ -77,6 +96,9 @@ def run_session(request, tournament_id, session_name):
         update = request.POST['update']
     sess.status = 'UP'
     sess.save()   
+    update_score(sess)
+       
+    
     return HttpResponse('Updating...')    
 
 #Not used yet

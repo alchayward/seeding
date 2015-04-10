@@ -26,8 +26,7 @@ def session(request, tournament_id, session_name):
    
     sess.teams = Team.objects.filter(session=sess.id)
     for team in sess.teams:
-        games_1 =
-Game.objects.filter(session=sess.id,team_1=team.id,staged=True)
+        games_1 = Game.objects.filter(session=sess.id,team_1=team.id,staged=True)
         for game in games_1:
             game.opp_name = Team.objects.get(id=game.team_2.id).name
             if game.completed:
@@ -35,8 +34,7 @@ Game.objects.filter(session=sess.id,team_1=team.id,staged=True)
             else:
                 result = "unplayed"
             game.result = result
-        games_2 =
-Game.objects.filter(session=sess.id,team_2=team.id,staged=True:
+        games_2 = Game.objects.filter(session=sess.id,team_2=team.id,staged=True)
         for game in games_2:
             game.opp_name = Team.objects.get(id=game.team_1.id).name
             if game.completed:

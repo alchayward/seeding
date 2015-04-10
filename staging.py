@@ -8,7 +8,7 @@ import pymc
 from scipy import cosh, rand, log
 from scipy.special import gammaincc, gammaln
 from numpy import dot,exp,array
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 
 def log_2_pois_like(d,a,s1,s2): #taken out the max_score  limit for now
     dp = np.sign(d)*np.power(np.abs(d),1.5)

@@ -58,6 +58,13 @@ def update_score(sess):
     #get games
     games = Game.objects.filter(session=sess.id,staged=True)
     teams = Team.objects.filter(session=sess.id)
+    
+    for g in games:
+       for ind,t in enumerate(teams):
+           if g.team_1 = t.id:
+                g.s_team_1 = ind
+           if g.team_2 = t.id:
+                g.s_team_2 = ind
     s = staging.Seeding(teams)
     s.games = games
     s.fit_model()

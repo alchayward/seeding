@@ -54,10 +54,10 @@ class double_model():
         team_idx = np.zeros([len(data_games),self.n_teams])
         scores = []
         for ind,game in enumerate(data_games):
-            score = [min(s,self.max_score) for s in game.scores]
-            scores.append(game.scores)   
-            team_idx[ind,game.teams[0].session_id] = 1
-            team_idx[ind,game.teams[1].session_id] = -1
+            score = [game.score_1,game.score_2]
+            scores.append(score)   
+            team_idx[ind,game.s_team_1] = 1
+            team_idx[ind,game.s_team_2] = -1
         
         return np.array(scores),np.array(team_idx)
 

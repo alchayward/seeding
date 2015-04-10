@@ -61,9 +61,9 @@ def update_score(sess):
     
     for g in games:
        for ind,t in enumerate(teams):
-           if g.team_1 = t.id:
+           if g.team_1 == t:
                 g.s_team_1 = ind
-           if g.team_2 = t.id:
+           if g.team_2 == t:
                 g.s_team_2 = ind
     s = staging.Seeding(teams)
     s.games = games
@@ -73,7 +73,7 @@ def update_score(sess):
     #make class
     #update the scores
     for ind,t in enumerate(teams):
-        t.score = rating[ind]
+        t.score = ratings[ind]
         t.save()
 
 

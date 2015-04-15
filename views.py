@@ -69,13 +69,19 @@ def update_score(sess):
     s.games = games
     s.fit_model()
     ratings  = s.mcmc.theta.stats()['mean']
-    print ratings
+    #print ratings
     #make class
     #update the scores
     for ind,t in enumerate(teams):
-        t.score = ratings[ind]
+        t.score = round(ratings[ind],2)
         t.save()
+    ord_teams = sorted(teams, key=lambda ta:-ta.score)
+    for ind,t in enumerate(ord_teams):
+        t.rank=ind+1
+	t.save()
 
+    return s.mcmc.theta.stats()
+	
 
 
 @login_required
@@ -103,10 +109,10 @@ def run_session(request, tournament_id, session_name):
         update = request.POST['update']
     sess.status = 'UP'
     sess.save()   
-    update_score(sess)
+    str = update_score(sess)
        
     
-    return HttpResponse('Updating...')    
+    return HttpResponse(str)    
 
 #Not used yet
 def game_list(request,session_id):

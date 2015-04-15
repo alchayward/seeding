@@ -140,9 +140,9 @@ class double_model():
         self.scale = 2.5
         
         # MC parameters
-        self.mc_points = 100000
+        self.mc_points = 400000
         self.mc_burn = 10000
-        self.mc_steps = 5
+        self.mc_steps = 1
     
         # This counter changes after refitting, it is rembmered by entities
         # that need to update

@@ -6,7 +6,11 @@
 		 {% if sess.teams %}
 			  <ul>
 			  {% for team in sess.teams %}
-				<li>{{team.rank}}) {{ team.name }} : {{team.score}} </li>
+				<li>{{team.rank}}) {{ team.name}}
+				 ({{team.member1 }},
+				 {{team.member2 }},
+				 {{team.member3 }})
+					 : {{team.score}} </li>
 				<table cellspacing="30">
 				{% for game in team.games %}
 					<tr>
